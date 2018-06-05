@@ -28,18 +28,18 @@
       max-width: 768px;
     }
 
-    #display {
+    .display-container {
       background-color: #fafafa;
     }
   </style>
 </head>
 <body>
-  <div class="display">
+  <div class="display-container">
     <pre id="display"></pre>
   </div>
   <div class="container">
     <h1 class="title">WeWreck</h1>
-    <p>Our network of demolition specialists can handle any demolition need.</p>
+    <p>Our network of demolition specialists can handle all your demolition needs.</p>
   </div>
   <script>
   function parseQuery() {
@@ -68,7 +68,7 @@
 
   if (query) {
     document.querySelector('#display').innerText = JSON.stringify(query, null, 2);
-    document.querySelector('#display').style.padding = '10px';
+    document.querySelector('.display-container').style.padding = '10px';
   }
   </script>
 </body>

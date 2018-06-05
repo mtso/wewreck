@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WeWreck</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Passion+One:400|Montserrat:500');
+
+    html, body, pre {
+      width: 100%;
+      margin: 0;
+    }
+    body {
+      background-color: #fc4;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+    }
+
+    h1 {
+      font-family: 'Passion One', sans-serif;
+    }
+
+    .container {
+      margin: 0 auto;
+      padding: 0 2em;
+      max-width: 768px;
+    }
+
+    #display {
+      background-color: #ddd;
+    }
+  </style>
+</head>
+<body>
+  <div class="display">
+    <pre id="display"></pre>
+  </div>
+  <div class="container">
+    <h1 class="title">WeWreck</h1>
+    <p>Our network of demolition specialists can handle any demolition need.</p>
+  </div>
+  <script>
+  function parseQuery() {
+    const url = window.location.href;
+
+    const querystring = url.split('?')
+      .slice(1)
+      .join('?');
+
+    if (!querystring) {
+      return null;
+    }
+
+    return querystring.split('&').reduce(function(query, piece) {
+      const pieces = piece.split('=');
+      const key = pieces[0];
+      const value = pieces.slice(1).join('=');
+      query[key] = decodeURIComponent(value);
+      return query;
+    }, {});
+
+    return querystring;
+  }
+
+  const query = parseQuery();
+
+  if (query) {
+    document.querySelector('#display').innerText = JSON.stringify(query, null, 2);
+    document.querySelector('#display').style.padding = '10px';
+  }
+  </script>
+</body>
+</html>

@@ -36,7 +36,9 @@
     img {
       width: 100%;
       height: auto;
+      background-color: rgba(0, 0, 0, 0.2);
 
+      /* Pixelate low-res images */
       image-rendering: -moz-crisp-edges;          /* Firefox */
       image-rendering:   -o-crisp-edges;          /* Opera */
       image-rendering: -webkit-optimize-contrast; /* Webkit (non-standard naming) */
@@ -83,9 +85,12 @@
     for (let i = 0; i < imgs.length; i++) {
       const img = imgs[i];
       if (img.getAttribute('data-hires')) {
-        img.addEventListener('click', function(evt) {
-          evt.target.src = img.getAttribute('data-hires');
-        });
+        const listener = function(evt) {
+          evt.target.src = '';
+          img.removeEventListener('click', listener);
+          setTimeout(function() { evt.target.src = img.getAttribute('data-hires'); }, 0);
+        };
+        img.addEventListener('click', listener);
       }
     }
   }
